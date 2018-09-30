@@ -8,6 +8,7 @@
             "email": "jianjamesastrero@gmail.com"
         }
     ],
+    "version": "0.1.0",
     "minimum-stability": "dev",
     "require": {
         "php": "^7.1.3",
