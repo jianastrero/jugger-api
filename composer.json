@@ -9,7 +9,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "php": "^7.1.3",
+        "laravel/passport": "^7.0",
+        "doctrine/dbal": "^2.8"
+    },
     "autoload": {
         "psr-4": {
             "JianAstrero\\JuggerAPI\\": "src/"
