@@ -1,0 +1,18 @@
+{
+    "name": "jianastrero/jugger-api",
+    "description": "Jugger API makes creating API's the easiest way possible on laravel. It runs together with your app and can be found at http://yourdomain.com/jugger-api. It depends on Passport and VueJS. Laravel Passport for OAuth for API's, and VueJS for the web to create your API's. Jugger API follows best practices for API development.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jian James Astrero",
+            "email": "jianjamesastrero@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "JianAstrero\\JuggerAPI\\": "src/"
+        }
+    }
+}
