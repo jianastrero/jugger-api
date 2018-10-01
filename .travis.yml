@@ -44,7 +44,7 @@ stages:
 
 jobs:
   allow_failure:
-    - php: true
+    - php: trusty
   fast_finish: true
   include:
 
