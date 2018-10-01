@@ -48,6 +48,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * Filtering / Searching algorithm
 * Code - Free Mutations Transformation
 * Disable web interface on production
+* Jugger User account not interfering with User accounts
 
 ## Installation
 #### 1. Require the package
