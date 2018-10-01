@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace JianAstrero\JuggerAPI\Console\Commands;
 
 use Illuminate\Console\Command;
 use JianAstrero\JuggerAPI\Models\JuggerRoute;

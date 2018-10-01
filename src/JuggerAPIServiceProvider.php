@@ -8,9 +8,9 @@
 
 namespace JianAstrero\JuggerAPI;
 
-use App\Console\Commands\JuggerSeed;
 use function app_path;
 use Illuminate\Support\ServiceProvider;
+use JianAstrero\JuggerAPI\Console\Commands\JuggerSeed;
 
 class JuggerAPIServiceProvider extends ServiceProvider
 {
