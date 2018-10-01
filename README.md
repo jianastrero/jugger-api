@@ -1,6 +1,12 @@
 <p align="middle">
 <h1>Jugger API</h1>
+</p>
+
+<p align="middle">
 <h3>Create API using CRUD</h3>
+</p>
+
+<p align="middle">
 <h3>Code-Free API creation</h3>
 </p>
 
