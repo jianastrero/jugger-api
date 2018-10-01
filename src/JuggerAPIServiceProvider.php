@@ -8,6 +8,7 @@
 
 namespace JianAstrero\JuggerAPI;
 
+use App\Console\Commands\JuggerSeed;
 use function app_path;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,9 +21,6 @@ class JuggerAPIServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
-            /**  cli **/
-            __DIR__.'/Commands' => app_path('Console/Commands'),
-
             /**  frontend **/
             __DIR__.'/public' => public_path('jianastrero/jugger-api'),
             __DIR__ . '/resources/js' => resource_path('jianastrero/jugger-api/js'),
@@ -32,6 +30,10 @@ class JuggerAPIServiceProvider extends ServiceProvider
 
     public function register()
     {
-
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                JuggerSeed::class
+            ]);
+        }
     }
 }
