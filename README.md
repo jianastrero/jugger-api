@@ -1,14 +1,12 @@
 # Jugger API
 ###### *Create API using CRUD* | *Code-Free API creation*
 
-***
-
 [![GitHub release](https://img.shields.io/github/release/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/issues)
-[![GitHub commits](https://img.shields.io/github/commits-since/jianastrero/jugger-api/1.0.0.svg)](https://github.com/jianastrero/jugger-api/commits)
+[![GitHub commits](https://img.shields.io/github/commits-since/jianastrero/jugger-api/latest.svg)](https://github.com/jianastrero/jugger-api/commits)
 [![GitHub issues](https://img.shields.io/github/issues/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/issues)
 [![GitHub license](https://img.shields.io/github/license/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/blob/master/LICENSE)
 
-
+***
 
 ![Jugger API](src/public/favicon.png)
 
