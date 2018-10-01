@@ -11,48 +11,76 @@
 ## Description
 Jugger API makes creating API's the easiest way possible on laravel. It runs together with your app and can be found at http://yourdomain.com/jugger-api. It depends on Passport, dbal and VueJS. Laravel Passport for OAuth on API's, and VueJS for the web to create your API's. dbal is used for transformation / mutation. Jugger API follows [best practices for API development](https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/).
 
+## Dependencies
+* laravel/passport
+* doctrine/dbal
+
 ## Installation
 #### 1. Require the package
 `composer require jianastrero/jugger-api`
-#### 2. Require laravel passport
-`composer require laravel/passport`
-#### 3. Require doctrine dbal
-`composer require doctrine/dbal`
-#### 4. Migrate your app, passport and jugger's tables
-`php artisan migrate`
-#### 5. Setup config with db credentials
+#### 2. Depending on your  laravel version, you may need to add this to config/app.php
+```php
+JianAstrero\JuggerAPI\JuggerAPIServiceProvider::class
+```
+#### 3. Publish Jugger API resources
+`php artisan vendor:publish --tag=jugger-api`
+#### 4. Setup config with db credentials
 ```env
 DB_HOST=localhost
 DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
-#### 6. Install passport
-`php artisan passport:install`
-#### 7. Publish Jugger API resources
-`php artisan vendor:publish --tag=jugger-api`
-#### 8. Seed Jugger API with its own
+#### 5. Migrate your app, passport and jugger's tables *(This is both for JuggerAPI and passport)*
+`php artisan migrate`
+#### 6. Seed Jugger API with its own
 `php artisan jugger:seed`
-#### 9. Install npm packages
+
+##### Passport *(for OAuth)* *read more on: [Laravel Passport](https://laravel.com/docs/5.7/passport)*
+
+#### 7. Install passport
+`php artisan passport:install`
+#### 8. use trait HasApiToken on User model
+```php
+use Notifiable, HasApiTokens;
+```
+#### 9. Add *Passport::routes* on  AuthServiceProvider
+```php
+public function boot()
+{
+    $this->registerPolicies();
+
+    Passport::routes();
+}
+```
+#### 10. Set the driver for api to passport on *config/auth.php*
+```php
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+
+    'api' => [
+        'driver' => 'passport',
+        'provider' => 'users',
+    ],
+],
+```
+
+##### VueJS
+#### 11. Install npm packages
 `npm install`
-#### 10. Install npm vue session
+#### 12. Install npm vue session
 `npm install vue-session`
-#### 11. Let web pack recognize sources (*webpack.mix.js*)
+#### 13. Let web pack recognize sources (*webpack.mix.js*)
 ```javascript
 mix
     .js('resources/jianastrero/jugger-api/js/jugger-api.js', 'public/js')
     .sass('resources/jianastrero/jugger-api/sass/jugger-api.scss', 'public/css');
 ```
-#### 12. Compile sources
+#### 14. Compile sources
 `npm run dev`
-#### 13. Depending on your  laravel version, you may need to add this to config/app.php
-```php
-JianAstrero\JuggerAPI\JuggerAPIServiceProvider::class
-```
-#### 14. use trait HasApiToken on User model
-```php
-use Notifiable, HasApiTokens;
-```
 
 ## How to use
 Run your web app(*php artisan serve*) then open your favorite web browser and navigate to http://127.0.0.1:8000/jugger-api
