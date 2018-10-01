@@ -1,4 +1,13 @@
-# Jugger API
+<p align="middle">
+<strong>Jugger API</strong>
+
+[![Latest Stable Version](https://poser.pugx.org/jianastrero/jugger-api/v/stable)](https://packagist.org/packages/jianastrero/jugger-api)
+[![Total Downloads](https://poser.pugx.org/jianastrero/jugger-api/downloads)](https://packagist.org/packages/jianastrero/jugger-api)
+[![Latest Unstable Version](https://poser.pugx.org/jianastrero/jugger-api/v/unstable)](https://packagist.org/packages/jianastrero/jugger-api)
+[![License](https://poser.pugx.org/jianastrero/jugger-api/license)](https://packagist.org/packages/jianastrero/jugger-api)
+[![composer.lock](https://poser.pugx.org/jianastrero/jugger-api/composerlock)](https://packagist.org/packages/jianastrero/jugger-api)
+
+</p>
 
 ![Jugger API](src/public/favicon.png)
 
@@ -40,7 +49,7 @@ DB_PASSWORD=secret
 #### 6. Seed Jugger API with its own
 `php artisan jugger:seed`
 
-##### Passport *(for OAuth)* *read more on: [Laravel Passport](https://laravel.com/docs/5.7/passport)*
+## Passport *(for OAuth)* *read more on: [Laravel Passport](https://laravel.com/docs/5.7/passport)*
 
 #### 7. Install passport
 `php artisan passport:install`
@@ -72,7 +81,7 @@ public function boot()
 ],
 ```
 
-##### VueJS
+## VueJS
 #### 11. Install npm packages
 `npm install`
 #### 12. Install npm vue session
@@ -88,15 +97,15 @@ mix
 
 ## How to use
 Run your web app(*php artisan serve*) then open your favorite web browser and navigate to http://127.0.0.1:8000/jugger-api
-From here, you could use any user you have created to login. Remember that as of now, it is required to use email and password to get authenticated and be logged in.
+From here, you could use any user you have to login. Remember that as of now, it is required to use email and password to get authenticated and be logged in.
 
-Once logged in, you could then create new routes, edit, or delete. Also, be careful to delete the record for JuggerAPI because it will refrain you from creating, modifying, or deleting new records.
+Once logged in, you could then create new routes, edit, or delete. Also, be careful to delete the record for JuggerAPI because it will refrain you from creating, modifying, or deleting new records. To fix this, run `php artisan jugger:seed` again.
 
-## To add a model to your route, your model should use the traits HasTable and CanMutate
+## To make a model be recognized by JuggerAPI, your model should use the traits HasTable and CanMutate
 ```php
 use Notifiable, HasApiTokens, HasTable, CanMutate;
 ```
-When this is done, just refresh your page and this model will be available on add and edit modal selection,
+When this is done, just refresh your page and this model will be available on add and edit modal selection.
 
 
 ## License
