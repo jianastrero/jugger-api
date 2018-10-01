@@ -1,13 +1,13 @@
 <p align="middle">
-<strong>Jugger API</strong>
-
+<h1>Jugger API</h1>
+</p>
+<div style="text-align:center">
 [![Latest Stable Version](https://poser.pugx.org/jianastrero/jugger-api/v/stable)](https://packagist.org/packages/jianastrero/jugger-api)
 [![Total Downloads](https://poser.pugx.org/jianastrero/jugger-api/downloads)](https://packagist.org/packages/jianastrero/jugger-api)
 [![Latest Unstable Version](https://poser.pugx.org/jianastrero/jugger-api/v/unstable)](https://packagist.org/packages/jianastrero/jugger-api)
 [![License](https://poser.pugx.org/jianastrero/jugger-api/license)](https://packagist.org/packages/jianastrero/jugger-api)
 [![composer.lock](https://poser.pugx.org/jianastrero/jugger-api/composerlock)](https://packagist.org/packages/jianastrero/jugger-api)
-
-</p>
+</div>
 
 ![Jugger API](src/public/favicon.png)
 
