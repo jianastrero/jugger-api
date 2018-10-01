@@ -39,7 +39,7 @@ class JuggerSeed extends Command
     public function handle()
     {
         $juggerRoute = new JuggerRoute();
-        $juggerRoute->model_name = 'App\JuggerRoute';
+        $juggerRoute->model_name = 'JianAstrero\JuggerAPI\Models\JuggerRoute';
         $juggerRoute->slug = 'jugger-api-routes';
         $juggerRoute->columns =
             array(
