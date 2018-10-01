@@ -1,6 +1,7 @@
 # Jugger API
-###### *Create API using CRUD*
-###### *Code-Free API creation*
+###### *Create API using CRUD* | *Code-Free API creation*
+
+***
 
 [![Latest Stable Version](https://poser.pugx.org/jianastrero/jugger-api/v/stable)](https://packagist.org/packages/jianastrero/jugger-api)
 [![Total Downloads](https://poser.pugx.org/jianastrero/jugger-api/downloads)](https://packagist.org/packages/jianastrero/jugger-api)
