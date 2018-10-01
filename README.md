@@ -20,7 +20,11 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 `composer require jianastrero/jugger-api`
 #### 2. Depending on your  laravel version, you may need to add this to config/app.php
 ```php
+'providers' => [
+...
 JianAstrero\JuggerAPI\JuggerAPIServiceProvider::class
+...
+]
 ```
 #### 3. Publish Jugger API resources
 `php artisan vendor:publish --tag=jugger-api`
