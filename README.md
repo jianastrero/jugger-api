@@ -3,11 +3,12 @@
 
 ***
 
-[![Latest Stable Version](https://poser.pugx.org/jianastrero/jugger-api/v/stable)](https://packagist.org/packages/jianastrero/jugger-api)
-[![Total Downloads](https://poser.pugx.org/jianastrero/jugger-api/downloads)](https://packagist.org/packages/jianastrero/jugger-api)
-[![Latest Unstable Version](https://poser.pugx.org/jianastrero/jugger-api/v/unstable)](https://packagist.org/packages/jianastrero/jugger-api)
-[![License](https://poser.pugx.org/jianastrero/jugger-api/license)](https://packagist.org/packages/jianastrero/jugger-api)
-[![composer.lock](https://poser.pugx.org/jianastrero/jugger-api/composerlock)](https://packagist.org/packages/jianastrero/jugger-api)
+[![GitHub release](https://img.shields.io/github/release/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/issues)
+[![GitHub commits](https://img.shields.io/github/commits-since/jianastrero/jugger-api/1.0.0.svg)](https://github.com/jianastrero/jugger-api/commits)
+[![GitHub issues](https://img.shields.io/github/issues/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/issues)
+[![GitHub license](https://img.shields.io/github/license/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/blob/master/LICENSE)
+
+
 
 ![Jugger API](src/public/favicon.png)
 
