@@ -14,7 +14,8 @@
     ],
     "support": {
         "email": "jianjamesastrero@gmail.com",
-        "source": "https://github.com/jianastrero/jugger-api"
+        "source": "https://github.com/jianastrero/jugger-api",
+        "wiki": "https://github.com/jianastrero/jugger-api/wiki"
     },
     "homepage": "https://github.com/jianastrero/jugger-api",
     "require": {
