@@ -1,13 +1,14 @@
 <p align="middle">
 <h1>Jugger API</h1>
+<h3>Create API using CRUD</h3>
+<h3>Code-Free API creation</h3>
 </p>
-<div style="text-align:center">
+
 [![Latest Stable Version](https://poser.pugx.org/jianastrero/jugger-api/v/stable)](https://packagist.org/packages/jianastrero/jugger-api)
 [![Total Downloads](https://poser.pugx.org/jianastrero/jugger-api/downloads)](https://packagist.org/packages/jianastrero/jugger-api)
 [![Latest Unstable Version](https://poser.pugx.org/jianastrero/jugger-api/v/unstable)](https://packagist.org/packages/jianastrero/jugger-api)
 [![License](https://poser.pugx.org/jianastrero/jugger-api/license)](https://packagist.org/packages/jianastrero/jugger-api)
 [![composer.lock](https://poser.pugx.org/jianastrero/jugger-api/composerlock)](https://packagist.org/packages/jianastrero/jugger-api)
-</div>
 
 ![Jugger API](src/public/favicon.png)
 
@@ -24,10 +25,36 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * laravel/passport
 * doctrine/dbal
 
+## Features
+* Admin Panel for API Routes
+* Integrated with Laravel Passport
+* CRUD style API creation
+* Handle's operations and errors using HTTP status codes
+* Flexible
+
+|              |Default|Override through request|Method|slug|
+|--------------|-------|------------------------|------|----|
+|select columns| OK | OK | GET |/jugger-api-routes?cols=id,model_name|
+|sort by column| OK | OK | GET |/jugger-api-routes?sort=id,asc|
+|specify items per page| OK | OK | GET |/jugger-api-routes?items=24|
+
+| resource slug | GET | POST | PUT | DELETE |
+|---------------|-----|------|-----|--------|
+| /jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
+| /jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
+
+## Features planned
+* API Version
+* API Overview
+* Change sorting format: from id,asc to +id *(+ is for ascending and - for descending)*
+* Filtering / Searching algorithm
+* Code - Free Mutations Transformation
+* Disable web interface on production
+
 ## Installation
 #### 1. Require the package
 `composer require jianastrero/jugger-api`
-#### 2. Depending on your  laravel version, you may need to add this to config/app.php
+#### 2. Depending on your laravel version, you may need to add this to *config/app.php*
 ```php
 'providers' => [
 ...
@@ -49,7 +76,7 @@ DB_PASSWORD=secret
 #### 6. Seed Jugger API with its own
 `php artisan jugger:seed`
 
-## Passport *(for OAuth)* *read more on: [Laravel Passport](https://laravel.com/docs/5.7/passport)*
+## Passport *(for OAuth) read more on: [Laravel Passport](https://laravel.com/docs/5.7/passport)*
 
 #### 7. Install passport
 `php artisan passport:install`
@@ -97,7 +124,7 @@ mix
 
 ## How to use
 Run your web app(*php artisan serve*) then open your favorite web browser and navigate to http://127.0.0.1:8000/jugger-api
-From here, you could use any user you have to login. Remember that as of now, it is required to use email and password to get authenticated and be logged in.
+From here, you could use any user you already have to login. If you dont have a user, better create one. *On Future changes JuggerAPI will have its own login account such that it wont interfere with your app*. Remember that as of now, it is required to use email and password to get authenticated and be logged in.
 
 Once logged in, you could then create new routes, edit, or delete. Also, be careful to delete the record for JuggerAPI because it will refrain you from creating, modifying, or deleting new records. To fix this, run `php artisan jugger:seed` again.
 
