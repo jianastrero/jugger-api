@@ -47,15 +47,6 @@ jobs:
   fast_finish: true
   include:
 
-    - stage: sniff
-      php: 7.2
-      env: PHPCS_BRANCH="dev-master"
-      before_install: phpenv config-rm xdebug.ini || echo 'No xdebug config.'
-      install: composer install --dev --no-suggest
-      script:
-        # Run PHPCS against VIPCS.
-        - ./bin/phpcs
-
     - stage: test
       php: 7.2
       env: PHPCS_BRANCH="dev-master"
