@@ -8,8 +8,17 @@
             "email": "jianjamesastrero@gmail.com"
         }
     ],
-    "version": "0.2.0",
-    "minimum-stability": "dev",
+    "keywords": [
+        "laravel",
+        "api"
+    ],
+    "support": {
+        "email": "jianjamesastrero@gmail.com",
+        "source": "https://github.com/jianastrero/jugger-api"
+    },
+    "homepage": "https://github.com/jianastrero/jugger-api",
+    "version": "1.0.0",
+    "minimum-stability": "stable",
     "require": {
         "laravel/passport": "^7.0",
         "doctrine/dbal": "^2.8"
