@@ -124,14 +124,14 @@
                     <div class="flex-grow-0">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li v-if="page.prev_page_url != null" :class="{'disabled': page.prev_page_url == null, 'pointer-events-none': page.prev_page_url == null}" class="page-item" v-on:click="fetchList(page.current_page-1)">
+                                <li :class="{'disabled': page.prev_page_url == null, 'pointer-events-none': page.prev_page_url == null}" class="page-item" v-on:click="fetchList(page.current_page-1, page.prev_page_url != null)">
                                     <a :class="{'text-primary': page.prev_page_url != null}" class="page-link">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
                                 <li v-for="(n, index) in pages" :key="index" :class="{'active jugger-pointer-none': index + 1 === page.current_page}" v-on:click="fetchList(index + 1)" class="page-item"><a class="page-link cursor-pointer">{{ index + 1 }}</a></li>
-                                <li v-if="page.last_page != page.current_page" :class="{'disabled': page.last_page == page.current_page, 'pointer-events-none': page.last_page == page.current_page}" class="page-item" v-on:click="fetchList(page.current_page+1)">
+                                <li :class="{'disabled': page.last_page == page.current_page, 'pointer-events-none': page.last_page == page.current_page}" class="page-item" v-on:click="fetchList(page.current_page+1, page.last_page != page.current_page)">
                                     <a :class="{'text-primary': page.last_page != page.current_page}" class="page-link">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
@@ -604,23 +604,25 @@
                     this.pages.push(currentPage + 2);
                 }
             },
-            fetchList(page = 1) {
-                this.tempPage = this.page;
-                this.page = [];
-                this.pages = [];
-                this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page, {
-                    mode: 'cors',
-                    method: 'get',
-                    headers: {
-                        'Authorization': 'Bearer '  + this.$session.get('accessToken'),
-                        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                        "Accept": "application/json"
-                    }
-                })
-                    .then(this.json)
-                    .then(this.handleJson)
-                    .catch(this.genericError);
+            fetchList(page = 1, clickable = true) {
+                if (clickable) {
+                    this.tempPage = this.page;
+                    this.page = [];
+                    this.pages = [];
+                    this.isLoading = true;
+                    fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page, {
+                        mode: 'cors',
+                        method: 'get',
+                        headers: {
+                            'Authorization': 'Bearer '  + this.$session.get('accessToken'),
+                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                            "Accept": "application/json"
+                        }
+                    })
+                        .then(this.json)
+                        .then(this.handleJson)
+                        .catch(this.genericError);
+                }
             },
             handleJson(json) {
                 this.isLoading = false;
