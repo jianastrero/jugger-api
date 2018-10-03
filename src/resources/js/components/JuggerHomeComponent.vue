@@ -528,7 +528,7 @@
                 messages: [],
                 selected: -1,
                 searchTerm: '',
-                doSearch: 3,
+                doSearchTimer: 3,
                 addInput: {
                     model: '',
                     slug: '',
@@ -826,15 +826,8 @@
                 this.resetSelected();
                 this.fetchList();
             },
-            searchTimer(reset = false) {
-                if (reset) this.doSearch = 3;
-                this.doSearch -= 1;
-                if (this.doSearch === 0)  {
-                    fetchList();
-                }
-                if (!reset) {
-                    setTimeout(this.searchTimer, 1000);
-                }
+            searchTimer() {
+                this.doSearchTimer -= 1;
             }
         },
         mounted() {
@@ -851,11 +844,14 @@
         watch: {
             searchTerm(val) {
                 if (val.trim() !== '') {
-                    if (val.trim().length === 1) {
-                        this.searchTimer();
-                    } else {
-                        this.searchTimer(true);
-                    }
+                    this.doSearchTimer = 3;
+                }
+            },
+            doSearchTimer(val) {
+                if (val > 0) {
+                    setTimeout(this.searchTimer, 1000);
+                } else {
+                    this.fetchList();
                 }
             }
         }
