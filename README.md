@@ -45,7 +45,6 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * API Version
 * API Overview
 * Change sorting format: from id,asc to +id *(+ is for ascending and - for descending)*
-* Filtering / Searching algorithm
 * Code - Free Mutations Transformation
 * Disable web interface on production
 * Jugger User account not interfering with User accounts
