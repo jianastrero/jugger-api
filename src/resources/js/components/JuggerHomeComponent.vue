@@ -43,7 +43,7 @@
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0 d-flex align-items-end">
-                        <form v-on:sumbit.prevent="doSearch" class="position-relative"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Press enter when you are done entering your search term">
+                        <form v-on:submit.prevent="doSearch" class="position-relative"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Press enter when you are done entering your search term">
                             <input v-model="searchTerm" type="text" class="form-control jugger-icon-right-input" placeholder="Search">
                             <i class="fas fa-search jugger-icon-right text-primary"></i>
                         </form>
