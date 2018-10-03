@@ -39,7 +39,7 @@ class JuggerAPIController extends Controller
                     $mCol = $column;
                     $mQuery = $query;
                     if (strpos($query, ':') !== false) {
-                        $mAsd = explode(':', $query)[0];
+                        $mAsd = explode(':', $query);
                         $mCol = $mAsd[0];
                         $mQuery = $mAsd[1];
                     }
