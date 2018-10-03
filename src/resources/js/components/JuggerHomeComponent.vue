@@ -139,6 +139,14 @@
                                 </li>
                             </ul>
                         </nav>
+                        <form v-on:submit.prevent="changeSelectedVersion" class="form-inline">
+                            <label for="selectVersion">Version </label>
+                            <select v-model="selectedVersion" id="selectVersion" class="form-control">
+                                <option v-for="(version, index) in versions" :key="index">
+                                    v{{ version }}
+                                </option>
+                            </select>
+                        </form>
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0">
@@ -514,7 +522,8 @@
         name: 'JuggerHomeComponent',
         props: [
             'rootUrl',
-            'propModels'
+            'propModels',
+            'propVersions',
         ],
         data() {
             return {
@@ -522,6 +531,8 @@
                 navOver: false,
                 isLoading: false,
                 models: [],
+                versions: [],
+                selectedVersion: 1,
                 page: [],
                 pages: [],
                 tempPage: [],
@@ -612,7 +623,7 @@
                         this.page = [];
                         this.pages = [];
                         this.isLoading = true;
-                        fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
+                        fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=version' + ':' + this.selectedVersion + ',' + this.searchTerm, {
                             mode: 'cors',
                             method: 'get',
                             headers: {
@@ -829,6 +840,9 @@
             },
             doSearch() {
                 this.fetchList();
+            },
+            changeSelectedVersion() {
+                this.fetchList();
             }
         },
         mounted() {
@@ -839,6 +853,7 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             this.models = JSON.parse(this.propModels);
+            this.versions = JSON.parse(this.propVersions);
 
             this.fetchList();
         },

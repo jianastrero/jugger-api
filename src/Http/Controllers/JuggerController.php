@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use JianAstrero\JuggerAPI\Models\JuggerRoute;
 use JianAstrero\JuggerAPI\Traits\CanMutate;
 use JianAstrero\JuggerAPI\Traits\HasTable;
 use function strlen;
@@ -47,8 +48,11 @@ class JuggerController extends Controller
             $modelColumnPairs[$model] = $cols;
         }
 
+        $versions = JuggerRoute::select('version')->groupBy('version')->get();
+
         $data = array(
-            'models' => $modelColumnPairs
+            'models' => $modelColumnPairs,
+            'versions' => $versions
         );
 
         return view('jugger-api::home', $data);
