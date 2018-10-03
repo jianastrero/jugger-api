@@ -43,10 +43,10 @@
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0 d-flex align-items-end">
-                        <div class="position-relative">
+                        <form v-on:sumbit.prevent="doSearch" class="position-relative"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Press enter when you are done entering your search term">
                             <input v-model="searchTerm" type="text" class="form-control jugger-icon-right-input" placeholder="Search">
                             <i class="fas fa-search jugger-icon-right text-primary"></i>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="flex-grow-1 jugger-table-round jugger-overflow-hidden position-relative mb-3 jugger-list-bg" style="overflow: auto;">
@@ -528,7 +528,6 @@
                 messages: [],
                 selected: -1,
                 searchTerm: '',
-                oldSearchTerm: '',
                 addInput: {
                     model: '',
                     slug: '',
@@ -826,13 +825,8 @@
                 this.resetSelected();
                 this.fetchList();
             },
-            searchTimer() {
-                if (this.oldSearchTerm !== this.searchTerm) {
-                    this.oldSearchTerm = this.searchTerm;
-                    this.fetchList();
-                } else {
-                    setTimeout(this.searchTimer, 2000);
-                }
+            doSearch() {
+                this.fetchList();
             }
         },
         mounted() {
@@ -846,15 +840,6 @@
 
             this.fetchList();
         },
-        watch: {
-            searchTerm(val) {
-                console.log('searchTimerCalled');
-                if (val.trim() !== '') {
-                    console.log('reset');
-                    setTimeout(this.searchTimer, 2000);
-                }
-            }
-        }
     }
 </script>
 
