@@ -528,6 +528,7 @@
                 messages: [],
                 selected: -1,
                 searchTerm: '',
+                doSearch: 3,
                 addInput: {
                     model: '',
                     slug: '',
@@ -606,22 +607,24 @@
                 }
             },
             fetchList(page = 1) {
-                this.tempPage = this.page;
-                this.page = [];
-                this.pages = [];
-                this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
-                    mode: 'cors',
-                    method: 'get',
-                    headers: {
-                        'Authorization': 'Bearer '  + this.$session.get('accessToken'),
-                        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                        "Accept": "application/json"
-                    }
-                })
-                    .then(this.json)
-                    .then(this.handleJson)
-                    .catch(this.genericError);
+                if (!isLoading) {
+                    this.tempPage = this.page;
+                    this.page = [];
+                    this.pages = [];
+                    this.isLoading = true;
+                    fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
+                        mode: 'cors',
+                        method: 'get',
+                        headers: {
+                            'Authorization': 'Bearer '  + this.$session.get('accessToken'),
+                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                            "Accept": "application/json"
+                        }
+                    })
+                        .then(this.json)
+                        .then(this.handleJson)
+                        .catch(this.genericError);
+                }
             },
             handleJson(json) {
                 this.isLoading = false;
@@ -822,6 +825,16 @@
                 this.addMessage(true, 'Successfully Deleted');
                 this.resetSelected();
                 this.fetchList();
+            },
+            searchTimer(reset = false) {
+                if (reset) this.doSearch = 3;
+                this.doSearch -= 1;
+                if (this.doSearch === 0)  {
+                    fetchList();
+                }
+                if (!reset) {
+                    setTimeout(this.searchTimer, 1000);
+                }
             }
         },
         mounted() {
@@ -838,7 +851,11 @@
         watch: {
             searchTerm(val) {
                 if (val.trim() !== '') {
-                    this.fetchList();
+                    if (val.trim().length === 1) {
+                        this.searchTimer();
+                    } else {
+                        this.searchTimer(true);
+                    }
                 }
             }
         }
