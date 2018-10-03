@@ -36,11 +36,18 @@ class JuggerAPIController extends Controller
             $first = true;
             foreach ($tableColumns as $column) {
                 foreach ($queries as $query) {
+                    $mCol = $column;
+                    $mQuery = $query;
+                    if (strpos($query, ':') !== false) {
+                        $mAsd = explode(':', $query)[0];
+                        $mCol = $mAsd[0];
+                        $mQuery = $mAsd[1];
+                    }
                     if ($first) {
-                        $list = $list->where($column, 'LIKE', '%'.$query.'%');
+                        $list = $list->where($mCol, 'LIKE', '%'.$mQuery.'%');
                         $first = false;
                     } else
-                        $list = $list->orWhere($column, 'LIKE', '%'.$query.'%');
+                        $list = $list->orWhere($mCol, 'LIKE', '%'.$mQuery.'%');
                 }
             }
         }
