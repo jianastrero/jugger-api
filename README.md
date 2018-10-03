@@ -29,6 +29,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * Integrated with Laravel Passport
 * CRUD style API creation
 * Handle's operations and errors using HTTP status codes
+* API Versioning
 * Flexible
 
 |              |Default|Override through request|Method|slug|
@@ -39,11 +40,10 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 
 | resource slug | GET | POST | PUT | DELETE |
 |---------------|-----|------|-----|--------|
-| /jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
-| /jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
+| /v1/jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
+| /v1/jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
 
 ## Features planned
-* API Version
 * API Overview
 * Change sorting format: from id,asc to +id *(+ is for ascending and - for descending)*
 * Filtering / Searching algorithm
