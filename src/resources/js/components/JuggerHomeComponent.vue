@@ -141,7 +141,7 @@
                         </nav>
                     </div>
                     <div class="flex-grow-0">
-                        <div class="form-inline pr-2">
+                        <div class="form-inline pl-2">
                             <label for="selectVersion">Version </label>
                             <select v-model="selectedVersion" id="selectVersion" class="form-control">
                                 <option v-for="(version, index) in versions" :key="index" :value="version.version">
@@ -625,7 +625,11 @@
                         this.page = [];
                         this.pages = [];
                         this.isLoading = true;
-                        fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=version' + ':' + this.selectedVersion + ',' + this.searchTerm, {
+                        var tSearch = "";
+                        if (this.searchTerm.trim() !== '') {
+                            tSearch = ',' + this.searchTerm;
+                        }
+                        fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=version' + ':' + this.selectedVersion + tSearch, {
                             mode: 'cors',
                             method: 'get',
                             headers: {
