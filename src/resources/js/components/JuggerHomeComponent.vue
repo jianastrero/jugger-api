@@ -44,7 +44,7 @@
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0 d-flex align-items-end">
                         <div class="position-relative">
-                            <input type="text" class="form-control jugger-icon-right-input" placeholder="Search" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<strong class='text-primary'>Jugger API's</strong> search function is on its way...">
+                            <input v-model="searchTerm" type="text" class="form-control jugger-icon-right-input" placeholder="Search">
                             <i class="fas fa-search jugger-icon-right text-primary"></i>
                         </div>
                     </div>
@@ -527,6 +527,7 @@
                 tempPage: [],
                 messages: [],
                 selected: -1,
+                searchTerm: '',
                 addInput: {
                     model: '',
                     slug: '',
@@ -609,7 +610,7 @@
                 this.page = [];
                 this.pages = [];
                 this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page, {
+                fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
                     mode: 'cors',
                     method: 'get',
                     headers: {
@@ -833,6 +834,13 @@
             this.models = JSON.parse(this.propModels);
 
             this.fetchList();
+        },
+        watch: {
+            searchTerm(val) {
+                if (val.trim() !== '') {
+                    this.fetchList();
+                }
+            }
         }
     }
 </script>
