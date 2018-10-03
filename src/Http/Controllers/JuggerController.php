@@ -3,6 +3,7 @@
 namespace JianAstrero\JuggerAPI\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use function count;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -49,6 +50,10 @@ class JuggerController extends Controller
         }
 
         $versions = JuggerRoute::select('version')->groupBy('version')->get();
+
+        $versions[] = array(
+            'version' => count($versions)
+        );
 
         $data = array(
             'models' => $modelColumnPairs,

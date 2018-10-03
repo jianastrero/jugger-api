@@ -141,14 +141,14 @@
                         </nav>
                     </div>
                     <div class="flex-grow-0">
-                        <form v-on:submit.prevent="changeSelectedVersion" class="form-inline">
+                        <div class="form-inline">
                             <label for="selectVersion">Version </label>
                             <select v-model="selectedVersion" id="selectVersion" class="form-control">
-                                <option v-for="(version, index) in versions" :key="index">
+                                <option v-for="(version, index) in versions" :key="index" :value="version.version">
                                     v{{ version.version }}
                                 </option>
                             </select>
-                        </form>
+                        </div>
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0">
@@ -842,9 +842,6 @@
             },
             doSearch() {
                 this.fetchList();
-            },
-            changeSelectedVersion() {
-                this.fetchList();
             }
         },
         mounted() {
@@ -859,6 +856,11 @@
 
             this.fetchList();
         },
+        watch: {
+            selectedVersion(val) {
+                this.fetchList();
+            }
+        }
     }
 </script>
 
