@@ -829,7 +829,7 @@
             searchTimer() {
                 if (this.oldSearchTerm !== this.searchTerm) {
                     this.oldSearchTerm = this.searchTerm;
-                    fetchList();
+                    this.fetchList();
                 } else {
                     setTimeout(this.searchTimer, 2000);
                 }
