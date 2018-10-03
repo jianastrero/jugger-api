@@ -607,22 +607,25 @@
             },
             fetchList(page = 1, clickable = true) {
                 if (clickable) {
-                if (!this.isLoading) {this.tempPage = this.page;
-                this.page = [];
-                this.pages = [];
-                this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page+ '&q=' + this.searchTerm, {
-                    mode: 'cors',
-                    method: 'get',
-                    headers: {
-                        'Authorization': 'Bearer '  + this.$session.get('accessToken'),
-                        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                        "Accept": "application/json"
+                    if (!this.isLoading) {
+                        this.tempPage = this.page;
+                        this.page = [];
+                        this.pages = [];
+                        this.isLoading = true;
+                        fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
+                            mode: 'cors',
+                            method: 'get',
+                            headers: {
+                                'Authorization': 'Bearer '  + this.$session.get('accessToken'),
+                                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                                "Accept": "application/json"
+                            }
+                        })
+                            .then(this.json)
+                            .then(this.handleJson)
+                            .catch(this.genericError);
                     }
-                })
-                    .then(this.json)
-                    .then(this.handleJson)
-                    .catch(this.genericError);}
+                }
             },
             handleJson(json) {
                 this.isLoading = false;
