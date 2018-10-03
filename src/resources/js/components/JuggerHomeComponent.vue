@@ -607,7 +607,7 @@
                 }
             },
             fetchList(page = 1) {
-                if (!isLoading) {
+                if (!this.isLoading) {
                     this.tempPage = this.page;
                     this.page = [];
                     this.pages = [];
