@@ -141,7 +141,7 @@
                         </nav>
                     </div>
                     <div class="flex-grow-0">
-                        <div class="form-inline">
+                        <div class="form-inline pr-2">
                             <label for="selectVersion">Version </label>
                             <select v-model="selectedVersion" id="selectVersion" class="form-control">
                                 <option v-for="(version, index) in versions" :key="index" :value="version.version">
