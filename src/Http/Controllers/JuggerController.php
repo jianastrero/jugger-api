@@ -52,7 +52,7 @@ class JuggerController extends Controller
         $versions = JuggerRoute::select('version')->groupBy('version')->get();
 
         $versions[] = array(
-            'version' => count($versions)
+            'version' => count($versions)+1
         );
 
         $data = array(
