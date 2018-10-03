@@ -528,7 +528,7 @@
                 messages: [],
                 selected: -1,
                 searchTerm: '',
-                doSearchTimer: 3,
+                oldSearchTerm: '',
                 addInput: {
                     model: '',
                     slug: '',
@@ -827,7 +827,12 @@
                 this.fetchList();
             },
             searchTimer() {
-                this.doSearchTimer -= 1;
+                if (this.oldSearchTerm !== this.searchTerm) {
+                    this.oldSearchTerm = this.searchTerm;
+                    fetchList();
+                } else {
+                    setTimeout(this.searchTimer, 2000);
+                }
             }
         },
         mounted() {
@@ -843,15 +848,10 @@
         },
         watch: {
             searchTerm(val) {
+                console.log('searchTimerCalled');
                 if (val.trim() !== '') {
-                    this.doSearchTimer = 3;
-                }
-            },
-            doSearchTimer(val) {
-                if (val > 0) {
-                    setTimeout(this.searchTimer, 1000);
-                } else {
-                    this.fetchList();
+                    console.log('reset');
+                    setTimeout(this.searchTimer, 2000);
                 }
             }
         }
