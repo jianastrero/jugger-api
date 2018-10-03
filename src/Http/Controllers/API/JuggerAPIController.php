@@ -30,6 +30,21 @@ class JuggerAPIController extends Controller
         }
         $list = $modelName::select(...$selectColumns);
 
+        if ($request->has('q')) {
+            $queries = explode(',', $request->q);
+            $tableColumns = $modelName::getTableColumnsStatically();
+            $first = true;
+            foreach ($tableColumns as $column) {
+                foreach ($queries as $query) {
+                    if ($first) {
+                        $list = $list->where($column, 'LIKE', '%'.$query.'%');
+                        $first = false;
+                    } else
+                        $list = $list->orWhere($column, 'LIKE', '%'.$query.'%');
+                }
+            }
+        }
+
         $sortColumns = $juggerRoute->sort;
         if ($juggerRoute->sort_override && $request->has('sort')) {
             $sortColumns = explode(',', $request->sort);

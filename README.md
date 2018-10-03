@@ -1,13 +1,12 @@
 # Jugger API
 ###### *Create API using CRUD* | *Code-Free API creation*
 
-***
+[![GitHub release](https://img.shields.io/github/release/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/issues)
+[![GitHub commits](https://img.shields.io/github/commits-since/jianastrero/jugger-api/latest.svg)](https://github.com/jianastrero/jugger-api/commits)
+[![GitHub issues](https://img.shields.io/github/issues/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/issues)
+[![GitHub license](https://img.shields.io/github/license/jianastrero/jugger-api.svg)](https://github.com/jianastrero/jugger-api/blob/master/LICENSE)
 
-[![Latest Stable Version](https://poser.pugx.org/jianastrero/jugger-api/v/stable)](https://packagist.org/packages/jianastrero/jugger-api)
-[![Total Downloads](https://poser.pugx.org/jianastrero/jugger-api/downloads)](https://packagist.org/packages/jianastrero/jugger-api)
-[![Latest Unstable Version](https://poser.pugx.org/jianastrero/jugger-api/v/unstable)](https://packagist.org/packages/jianastrero/jugger-api)
-[![License](https://poser.pugx.org/jianastrero/jugger-api/license)](https://packagist.org/packages/jianastrero/jugger-api)
-[![composer.lock](https://poser.pugx.org/jianastrero/jugger-api/composerlock)](https://packagist.org/packages/jianastrero/jugger-api)
+***
 
 ![Jugger API](src/public/favicon.png)
 
@@ -46,7 +45,6 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 ## Features planned
 * API Overview
 * Change sorting format: from id,asc to +id *(+ is for ascending and - for descending)*
-* Filtering / Searching algorithm
 * Code - Free Mutations Transformation
 * Disable web interface on production
 * Jugger User account not interfering with User accounts
