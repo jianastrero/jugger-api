@@ -139,11 +139,13 @@
                                 </li>
                             </ul>
                         </nav>
+                    </div>
+                    <div class="flex-grow-0">
                         <form v-on:submit.prevent="changeSelectedVersion" class="form-inline">
                             <label for="selectVersion">Version </label>
                             <select v-model="selectedVersion" id="selectVersion" class="form-control">
                                 <option v-for="(version, index) in versions" :key="index">
-                                    v{{ version }}
+                                    v{{ version.version }}
                                 </option>
                             </select>
                         </form>
