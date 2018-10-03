@@ -43,10 +43,10 @@
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0 d-flex align-items-end">
-                        <div class="position-relative">
-                            <input type="text" class="form-control jugger-icon-right-input" placeholder="Search" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<strong class='text-primary'>Jugger API's</strong> search function is on its way...">
+                        <form v-on:submit.prevent="doSearch" class="position-relative"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Press enter when you are done entering your search term">
+                            <input v-model="searchTerm" type="text" class="form-control jugger-icon-right-input" placeholder="Search">
                             <i class="fas fa-search jugger-icon-right text-primary"></i>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="flex-grow-1 jugger-table-round jugger-overflow-hidden position-relative mb-3 jugger-list-bg" style="overflow: auto;">
@@ -527,6 +527,7 @@
                 tempPage: [],
                 messages: [],
                 selected: -1,
+                searchTerm: '',
                 addInput: {
                     model: '',
                     slug: '',
@@ -605,22 +606,24 @@
                 }
             },
             fetchList(page = 1) {
-                this.tempPage = this.page;
-                this.page = [];
-                this.pages = [];
-                this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page, {
-                    mode: 'cors',
-                    method: 'get',
-                    headers: {
-                        'Authorization': 'Bearer '  + this.$session.get('accessToken'),
-                        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                        "Accept": "application/json"
-                    }
-                })
-                    .then(this.json)
-                    .then(this.handleJson)
-                    .catch(this.genericError);
+                if (!this.isLoading) {
+                    this.tempPage = this.page;
+                    this.page = [];
+                    this.pages = [];
+                    this.isLoading = true;
+                    fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
+                        mode: 'cors',
+                        method: 'get',
+                        headers: {
+                            'Authorization': 'Bearer '  + this.$session.get('accessToken'),
+                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                            "Accept": "application/json"
+                        }
+                    })
+                        .then(this.json)
+                        .then(this.handleJson)
+                        .catch(this.genericError);
+                }
             },
             handleJson(json) {
                 this.isLoading = false;
@@ -821,6 +824,9 @@
                 this.addMessage(true, 'Successfully Deleted');
                 this.resetSelected();
                 this.fetchList();
+            },
+            doSearch() {
+                this.fetchList();
             }
         },
         mounted() {
@@ -833,7 +839,7 @@
             this.models = JSON.parse(this.propModels);
 
             this.fetchList();
-        }
+        },
     }
 </script>
 
