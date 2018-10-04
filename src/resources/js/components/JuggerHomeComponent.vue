@@ -681,7 +681,8 @@
                     'update=' + this.addInput.updateAllowed + '&' +
                     'delete=' + this.addInput.deleteAllowed + '&' +
                     'list=' + this.addInput.listAllowed + '&' +
-                    'paginate_item_count=' + this.addInput.paginationItemCount
+                    'paginate_item_count=' + this.addInput.paginationItemCount + '&' +
+                    'version=' + this.selectedVersion
                 );
 
                 this.isLoading = true;
@@ -765,7 +766,8 @@
                     'update=' + this.editInput.updateAllowed + '&' +
                     'delete=' + this.editInput.deleteAllowed + '&' +
                     'list=' + this.editInput.listAllowed + '&' +
-                    'paginate_item_count=' + this.editInput.paginationItemCount
+                    'paginate_item_count=' + this.editInput.paginationItemCount + '&' +
+                    'version=' + this.selectedVersion
                 );
 
                 this.isLoading = true;
