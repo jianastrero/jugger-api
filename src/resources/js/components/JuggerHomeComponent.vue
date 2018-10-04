@@ -629,7 +629,7 @@
                         if (this.searchTerm.trim() !== '') {
                             tSearch = ',' + this.searchTerm;
                         }
-                        fetch(this.rootUrl + '/v1/api/jugger-api-routes?page=' + page + '&q=version' + ':' + this.selectedVersion + tSearch, {
+                        fetch(this.rootUrl + '/api/v1/jugger-api-routes?page=' + page + '&q=version' + ':' + this.selectedVersion + tSearch, {
                             mode: 'cors',
                             method: 'get',
                             headers: {
@@ -686,7 +686,7 @@
                 );
 
                 this.isLoading = true;
-                fetch(this.rootUrl + '/v1/api/jugger-api-routes', {
+                fetch(this.rootUrl + '/api/v1/jugger-api-routes', {
                     mode: 'cors',
                     method: 'post',
                     headers: {
@@ -771,7 +771,7 @@
                 );
 
                 this.isLoading = true;
-                fetch(this.rootUrl + '/v1/api/jugger-api-route/' + this.selected, {
+                fetch(this.rootUrl + '/api/v1/jugger-api-route/' + this.selected, {
                     mode: 'cors',
                     method: 'put',
                     headers: {
@@ -823,7 +823,7 @@
             },
             deleteSelected() {
                 this.isLoading = true;
-                fetch(this.rootUrl + '/v1/api/jugger-api-route/' + this.selected, {
+                fetch(this.rootUrl + '/api/v1/jugger-api-route/' + this.selected, {
                     mode: 'cors',
                     method: 'delete',
                     headers: {
