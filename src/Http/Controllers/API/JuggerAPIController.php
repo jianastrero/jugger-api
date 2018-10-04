@@ -16,7 +16,7 @@ use function str_singular;
 class JuggerAPIController extends Controller
 {
     public function getList(Request $request, $version, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->list || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -77,7 +77,7 @@ class JuggerAPIController extends Controller
     }
 
     public function item(Request $request, $version, $slug, $id) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->read || $slug != str_singular($slug)) {
             return $this->notFound();
@@ -102,7 +102,7 @@ class JuggerAPIController extends Controller
     }
 
     public function create(Request $request, $version, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->create || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -129,7 +129,7 @@ class JuggerAPIController extends Controller
     }
 
     public function updateMultiple(Request $request, $version, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->update || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -174,7 +174,7 @@ class JuggerAPIController extends Controller
     }
 
     public function update(Request $request, $version, $slug, $id) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->update || $slug != str_singular($slug)) {
             return $this->notFound();
@@ -205,7 +205,7 @@ class JuggerAPIController extends Controller
     }
 
     public function deleteMultiple(Request $request, $version, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->delete || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -243,7 +243,7 @@ class JuggerAPIController extends Controller
     }
 
     public function delete(Request $request, $version, $slug, $id) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', $version)->first();
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->delete || $slug != str_singular($slug)) {
             return $this->notFound();
