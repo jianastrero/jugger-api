@@ -132,6 +132,20 @@ use Notifiable, HasApiTokens, HasTable, CanMutate;
 ```
 When this is done, just refresh your page and this model will be available on add and edit modal selection.
 
+## To allow add and edit on a model, you need to define fillables
+```php
+protected $fillable = [
+    'name', 'email', 'password',
+];
+```
+
+## For automatic mutation, Jugger API utilizes the casts array of models to transform columns
+```php
+protected $casts = [
+    'array_column' => 'array'
+];
+```
+
 
 ## License
 This software is released under the [MIT license](https://opensource.org/licenses/MIT).
