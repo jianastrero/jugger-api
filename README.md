@@ -35,7 +35,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 |--------------|:-----:|:----------------------:|:----:|----|
 |select columns| OK | OK | GET |/api/v1/jugger-api-routes?cols=id,model_name|
 |sort by column| OK | OK | GET |/api/v1/jugger-api-routes?sort=id,asc|
-|search or filter| OK | OK | GET |/api/v1/jugger-api-routes?q=slug:user *or* /jugger-api-routes?q=users *or* /jugger-api-routes?q=slug:user,users|
+|search or filter| OK | OK | GET |/api/v1/jugger-api-routes?q=slug:user ***or*** <br/> /jugger-api-routes?q=users ***or*** <br/> /jugger-api-routes?q=slug:user,users|
 |specify items per page| OK | OK | GET |/api/v1/jugger-api-routes?items=24|
 
 | resource slug | GET | POST | PUT | DELETE |
