@@ -33,15 +33,15 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 
 |              |Default|Override through request|Method|slug|
 |--------------|:-----:|:----------------------:|:----:|----|
-|select columns| OK | OK | GET |/jugger-api-routes?cols=id,model_name|
-|sort by column| OK | OK | GET |/jugger-api-routes?sort=id,asc|
-|search or filter| OK | OK | GET |/jugger-api-routes?q=slug:user *or* /jugger-api-routes?q=users *or* /jugger-api-routes?q=slug:user,users|
-|specify items per page| OK | OK | GET |/jugger-api-routes?items=24|
+|select columns| OK | OK | GET |/api/v1/jugger-api-routes?cols=id,model_name|
+|sort by column| OK | OK | GET |/api/v1/jugger-api-routes?sort=id,asc|
+|search or filter| OK | OK | GET |/api/v1/jugger-api-routes?q=slug:user *or* /jugger-api-routes?q=users *or* /jugger-api-routes?q=slug:user,users|
+|specify items per page| OK | OK | GET |/api/v1/jugger-api-routes?items=24|
 
 | resource slug | GET | POST | PUT | DELETE |
 |---------------|-----|------|-----|--------|
-| /v1/jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
-| /v1/jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
+| /api/v1/jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
+| /api/v1/jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
 
 ## Features planned
 * API Overview
