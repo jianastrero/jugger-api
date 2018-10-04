@@ -39,7 +39,6 @@ trait CanMutate
     private function mutateColumns() {
         foreach ($this->getTableColumns() as $key) {
             $type = Schema::getColumnType($this->getTable(), $key);
-            $types[$key] = $type;
             if ($type == 'boolean') {
                 $this->{$key} = $this->{$key} == 1;
             } else if (is_string($this->{$key}) && get_called_class()::is_JSON($this->{$key})) {
