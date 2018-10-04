@@ -12,5 +12,9 @@
     @php
     // die(json_encode($models));
     @endphp
-    <jugger-home-component :root-url="'{{ url('') }}'" :prop-models="'{{ json_encode($models) }}'"></jugger-home-component>
+    <jugger-home-component
+            :root-url="'{{ url('') }}'"
+            :prop-models="'{{ json_encode($models) }}'"
+            :prop-versions="'{{ json_encode($versions) }}'">
+    </jugger-home-component>
 @endsection

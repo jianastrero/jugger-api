@@ -28,6 +28,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * Integrated with Laravel Passport
 * CRUD style API creation
 * Handle's operations and errors using HTTP status codes
+* API Versioning
 * Flexible
 
 |              |Default|Override through request|Method|slug|
@@ -38,11 +39,10 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 
 | resource slug | GET | POST | PUT | DELETE |
 |---------------|-----|------|-----|--------|
-| /jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
-| /jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
+| /v1/jugger-api-routes  | Returns a list  | Creates an item | Updates multiple items | Delete multiple items |
+| /v1/jugger-api-route/1 | Returns an item | 404             | Updates an item        | Delete an item        |
 
 ## Features planned
-* API Version
 * API Overview
 * Change sorting format: from id,asc to +id *(+ is for ascending and - for descending)*
 * Code - Free Mutations Transformation
@@ -131,6 +131,20 @@ Once logged in, you could then create new routes, edit, or delete. Also, be care
 use Notifiable, HasApiTokens, HasTable, CanMutate;
 ```
 When this is done, just refresh your page and this model will be available on add and edit modal selection.
+
+## To allow add and edit on a model, you need to define fillables
+```php
+protected $fillable = [
+    'name', 'email', 'password',
+];
+```
+
+## For automatic mutation, Jugger API utilizes the casts array of models to transform columns
+```php
+protected $casts = [
+    'array_column' => 'array'
+];
+```
 
 
 ## License

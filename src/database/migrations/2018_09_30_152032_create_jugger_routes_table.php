@@ -19,6 +19,7 @@ class CreateJuggerRoutesTable extends Migration
             $table->string('slug');
             $table->text('columns');
             $table->text('sort');
+            $table->unsignedInteger('version')->default(1);
             $table->boolean('column_override')->default(false);
             $table->boolean('sort_override')->default(false);
             $table->boolean('create')->default(true);

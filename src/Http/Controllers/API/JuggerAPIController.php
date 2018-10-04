@@ -15,8 +15,8 @@ use function str_singular;
 
 class JuggerAPIController extends Controller
 {
-    public function getList(Request $request, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function getList(Request $request, $version, $slug) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->list || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -36,11 +36,18 @@ class JuggerAPIController extends Controller
             $first = true;
             foreach ($tableColumns as $column) {
                 foreach ($queries as $query) {
+                    $mCol = $column;
+                    $mQuery = $query;
+                    if (strpos($query, ':') !== false) {
+                        $mAsd = explode(':', $query);
+                        $mCol = $mAsd[0];
+                        $mQuery = $mAsd[1];
+                    }
                     if ($first) {
-                        $list = $list->where($column, 'LIKE', '%'.$query.'%');
+                        $list = $list->where($mCol, 'LIKE', '%'.$mQuery.'%');
                         $first = false;
                     } else
-                        $list = $list->orWhere($column, 'LIKE', '%'.$query.'%');
+                        $list = $list->orWhere($mCol, 'LIKE', '%'.$mQuery.'%');
                 }
             }
         }
@@ -69,8 +76,8 @@ class JuggerAPIController extends Controller
         return response()->json($list, 200);
     }
 
-    public function item(Request $request, $slug, $id) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function item(Request $request, $version, $slug, $id) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->read || $slug != str_singular($slug)) {
             return $this->notFound();
@@ -94,8 +101,8 @@ class JuggerAPIController extends Controller
         return response()->json($item, 200);
     }
 
-    public function create(Request $request, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function create(Request $request, $version, $slug) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->create || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -121,8 +128,8 @@ class JuggerAPIController extends Controller
         return response()->json($item, 201);
     }
 
-    public function updateMultiple(Request $request, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function updateMultiple(Request $request, $version, $slug) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->update || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -166,8 +173,8 @@ class JuggerAPIController extends Controller
         return response()->json(array('update_count'=>$updateCount), 202);
     }
 
-    public function update(Request $request, $slug, $id) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function update(Request $request, $version, $slug, $id) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->update || $slug != str_singular($slug)) {
             return $this->notFound();
@@ -197,8 +204,8 @@ class JuggerAPIController extends Controller
         return response()->json($item, 202);
     }
 
-    public function deleteMultiple(Request $request, $slug) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function deleteMultiple(Request $request, $version, $slug) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->delete || $slug != str_plural($slug)) {
             return $this->notFound();
@@ -235,8 +242,8 @@ class JuggerAPIController extends Controller
         return response()->json(array('delete_count'=>$deleteCount), 204);
     }
 
-    public function delete(Request $request, $slug, $id) {
-        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->first();
+    public function delete(Request $request, $version, $slug, $id) {
+        $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 
         if ($juggerRoute == null || !$juggerRoute->delete || $slug != str_singular($slug)) {
             return $this->notFound();

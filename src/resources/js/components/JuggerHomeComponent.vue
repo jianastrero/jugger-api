@@ -124,14 +124,14 @@
                     <div class="flex-grow-0">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li v-if="page.prev_page_url != null" :class="{'disabled': page.prev_page_url == null, 'pointer-events-none': page.prev_page_url == null}" class="page-item" v-on:click="fetchList(page.current_page-1)">
+                                <li :class="{'disabled': page.prev_page_url == null, 'pointer-events-none': page.prev_page_url == null}" class="page-item" v-on:click="fetchList(page.current_page-1, page.prev_page_url != null)">
                                     <a :class="{'text-primary': page.prev_page_url != null}" class="page-link">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
                                 <li v-for="(n, index) in pages" :key="index" :class="{'active jugger-pointer-none': index + 1 === page.current_page}" v-on:click="fetchList(index + 1)" class="page-item"><a class="page-link cursor-pointer">{{ index + 1 }}</a></li>
-                                <li v-if="page.last_page != page.current_page" :class="{'disabled': page.last_page == page.current_page, 'pointer-events-none': page.last_page == page.current_page}" class="page-item" v-on:click="fetchList(page.current_page+1)">
+                                <li :class="{'disabled': page.last_page == page.current_page, 'pointer-events-none': page.last_page == page.current_page}" class="page-item" v-on:click="fetchList(page.current_page+1, page.last_page != page.current_page)">
                                     <a :class="{'text-primary': page.last_page != page.current_page}" class="page-link">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
@@ -139,6 +139,16 @@
                                 </li>
                             </ul>
                         </nav>
+                    </div>
+                    <div class="flex-grow-0">
+                        <div class="form-inline">
+                            <label for="selectVersion" class="pl-3 pr-2">Version </label>
+                            <select v-model="selectedVersion" id="selectVersion" class="form-control">
+                                <option v-for="(version, index) in versions" :key="index" :value="version.version">
+                                    v{{ version.version }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="flex-grow-0">
@@ -514,7 +524,8 @@
         name: 'JuggerHomeComponent',
         props: [
             'rootUrl',
-            'propModels'
+            'propModels',
+            'propVersions',
         ],
         data() {
             return {
@@ -522,6 +533,8 @@
                 navOver: false,
                 isLoading: false,
                 models: [],
+                versions: [],
+                selectedVersion: 1,
                 page: [],
                 pages: [],
                 tempPage: [],
@@ -605,24 +618,30 @@
                     this.pages.push(currentPage + 2);
                 }
             },
-            fetchList(page = 1) {
-                if (!this.isLoading) {
-                    this.tempPage = this.page;
-                    this.page = [];
-                    this.pages = [];
-                    this.isLoading = true;
-                    fetch(this.rootUrl + '/api/jugger-api-routes?page=' + page + '&q=' + this.searchTerm, {
-                        mode: 'cors',
-                        method: 'get',
-                        headers: {
-                            'Authorization': 'Bearer '  + this.$session.get('accessToken'),
-                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                            "Accept": "application/json"
+            fetchList(page = 1, clickable = true) {
+                if (clickable) {
+                    if (!this.isLoading) {
+                        this.tempPage = this.page;
+                        this.page = [];
+                        this.pages = [];
+                        this.isLoading = true;
+                        var tSearch = "";
+                        if (this.searchTerm.trim() !== '') {
+                            tSearch = ',' + this.searchTerm;
                         }
-                    })
-                        .then(this.json)
-                        .then(this.handleJson)
-                        .catch(this.genericError);
+                        fetch(this.rootUrl + '/api/v1/jugger-api-routes?page=' + page + '&q=version' + ':' + this.selectedVersion + tSearch, {
+                            mode: 'cors',
+                            method: 'get',
+                            headers: {
+                                'Authorization': 'Bearer '  + this.$session.get('accessToken'),
+                                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                                "Accept": "application/json"
+                            }
+                        })
+                            .then(this.json)
+                            .then(this.handleJson)
+                            .catch(this.genericError);
+                    }
                 }
             },
             handleJson(json) {
@@ -662,11 +681,12 @@
                     'update=' + this.addInput.updateAllowed + '&' +
                     'delete=' + this.addInput.deleteAllowed + '&' +
                     'list=' + this.addInput.listAllowed + '&' +
-                    'paginate_item_count=' + this.addInput.paginationItemCount
+                    'paginate_item_count=' + this.addInput.paginationItemCount + '&' +
+                    'version=' + this.selectedVersion
                 );
 
                 this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-routes', {
+                fetch(this.rootUrl + '/api/v1/jugger-api-routes', {
                     mode: 'cors',
                     method: 'post',
                     headers: {
@@ -746,11 +766,12 @@
                     'update=' + this.editInput.updateAllowed + '&' +
                     'delete=' + this.editInput.deleteAllowed + '&' +
                     'list=' + this.editInput.listAllowed + '&' +
-                    'paginate_item_count=' + this.editInput.paginationItemCount
+                    'paginate_item_count=' + this.editInput.paginationItemCount + '&' +
+                    'version=' + this.selectedVersion
                 );
 
                 this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-route/' + this.selected, {
+                fetch(this.rootUrl + '/api/v1/jugger-api-route/' + this.selected, {
                     mode: 'cors',
                     method: 'put',
                     headers: {
@@ -802,7 +823,7 @@
             },
             deleteSelected() {
                 this.isLoading = true;
-                fetch(this.rootUrl + '/api/jugger-api-route/' + this.selected, {
+                fetch(this.rootUrl + '/api/v1/jugger-api-route/' + this.selected, {
                     mode: 'cors',
                     method: 'delete',
                     headers: {
@@ -837,9 +858,15 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             this.models = JSON.parse(this.propModels);
+            this.versions = JSON.parse(this.propVersions);
 
             this.fetchList();
         },
+        watch: {
+            selectedVersion(val) {
+                this.fetchList();
+            }
+        }
     }
 </script>
 

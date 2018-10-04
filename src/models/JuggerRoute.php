@@ -22,7 +22,8 @@ class JuggerRoute extends Model
         'update',
         'delete',
         'list',
-        'paginate_item_count'
+        'paginate_item_count',
+        'version'
     ];
 
     protected $casts = [
