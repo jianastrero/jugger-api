@@ -58,7 +58,7 @@ class JuggerSeed extends Command
                 'paginate_item_count',
             );
         $juggerRoute->column_override = true;
-        $juggerRoute->sort = array('model_name','asc');
+        $juggerRoute->sort = '+model_name';
         $juggerRoute->sort_override = true;
         $juggerRoute->save();
     }

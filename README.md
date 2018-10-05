@@ -34,7 +34,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 |              |Default|Override through request|Method|slug|
 |--------------|:-----:|:----------------------:|:----:|----|
 |select columns| OK | OK | GET |/api/v1/jugger-api-routes?cols=id,model_name|
-|sort by column| OK | OK | GET |/api/v1/jugger-api-routes?sort=id,asc|
+|sort by column| OK | OK | GET |/api/v1/jugger-api-routes?sort=+id ***or*** <br/> /api/v1/jugger-api-routes?sort=-id|
 |search or filter| OK | OK | GET |/api/v1/jugger-api-routes?q=slug:user ***or*** <br/> /jugger-api-routes?q=users ***or*** <br/> /jugger-api-routes?q=slug:user,users|
 |specify items per page| OK | OK | GET |/api/v1/jugger-api-routes?items=24|
 
@@ -45,7 +45,6 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 
 ## Features planned
 * API Overview
-* Change sorting format: from id,asc to +id *(+ is for ascending and - for descending)*
 * Code - Free Mutations Transformation
 * Disable web interface on production
 * Jugger User account not interfering with User accounts
