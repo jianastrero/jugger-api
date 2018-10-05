@@ -30,6 +30,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * Handle's operations and errors using HTTP status codes
 * API Versioning
 * Jugger Admin Account for JuggerAPI only
+* Auto-disable web interface on production
 * Flexible
 
 |              |Default|Override through request|Method|slug|
@@ -47,7 +48,6 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 ## Features planned
 * API Overview
 * Code - Free Mutations Transformation
-* Disable web interface on production
 
 ## Installation
 #### 1. Require the package
