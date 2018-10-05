@@ -12,6 +12,7 @@ use function json_decode;
 use function response;
 use function str_plural;
 use function str_singular;
+use function substr;
 
 class JuggerAPIController extends Controller
 {
@@ -53,12 +54,21 @@ class JuggerAPIController extends Controller
         }
 
         $sortColumns = $juggerRoute->sort;
+        $sortAscending = 'asc';
         if ($juggerRoute->sort_override && $request->has('sort')) {
-            $sortColumns = explode(',', $request->sort);
+            $sortColumns = $request->sort;
+        }
+
+        if ($sortColumns[0] == '-') {
+            $sortAscending = 'desc';
+            $sortColumns = substr($sortColumns, 1);
+        } else if ($sortColumns[0] == '+') {
+            $sortAscending = 'asc';
+            $sortColumns = substr($sortColumns, 1);
         }
 
         for ($i = 0; $i < count($sortColumns); $i++) {
-            $list = $list->orderBy($sortColumns[$i], $sortColumns[++$i]);
+            $list = $list->orderBy($sortColumns, $sortAscending);
         }
 
         // override pagination
