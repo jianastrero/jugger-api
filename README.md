@@ -73,16 +73,18 @@ DB_PASSWORD=secret
 `php artisan migrate`
 #### 6. Seed Jugger API with its own
 `php artisan jugger:seed`
+#### 7. Create your jugger api admin account (default username: juggeradmin, default password: AdminPassword)
+`php artisan jugger:admin` or `php artisan jugger:admin myadminuser myadminpassword`
 
 ## Passport *(for OAuth) read more on: [Laravel Passport](https://laravel.com/docs/5.7/passport)*
 
-#### 7. Install passport
+#### 8. Install passport
 `php artisan passport:install`
-#### 8. use trait HasApiToken on User model
+#### 9. use trait HasApiToken on User model
 ```php
 use Notifiable, HasApiTokens;
 ```
-#### 9. Add *Passport::routes* on  AuthServiceProvider
+#### 10. Add *Passport::routes* on  AuthServiceProvider
 ```php
 public function boot()
 {
@@ -91,7 +93,7 @@ public function boot()
     Passport::routes();
 }
 ```
-#### 10. Set the driver for api and add Jugger API admin's guards to passport and add provider for jugger admins on *config/auth.php*
+#### 11. Set the driver for api and add Jugger API admin's guards to passport and add provider for jugger admins on *config/auth.php*
 ```php
 'guards' => [
     'web' => [
@@ -128,17 +130,17 @@ public function boot()
 ```
 
 ## VueJS
-#### 11. Install npm packages
+#### 12. Install npm packages
 `npm install`
-#### 12. Install npm vue session
+#### 13. Install npm vue session
 `npm install vue-session`
-#### 13. Let web pack recognize sources (*webpack.mix.js*)
+#### 14. Let web pack recognize sources (*webpack.mix.js*)
 ```javascript
 mix
     .js('resources/jianastrero/jugger-api/js/jugger-api.js', 'public/js')
     .sass('resources/jianastrero/jugger-api/sass/jugger-api.scss', 'public/css');
 ```
-#### 14. Compile sources
+#### 15. Compile sources
 `npm run dev`
 
 ## How to use
@@ -167,6 +169,7 @@ protected $casts = [
 ];
 ```
 
+# *NOTE: JUGGER API IS AUTOMATICALLY DISABLED ON PRODUCTION MODE(DEBUG OFF / FALSE). THIS IS TO PREVENT API'S FROM BEING ALTERED ON PRODUCTION*
 
 ## License
 This software is released under the [MIT license](https://opensource.org/licenses/MIT).
