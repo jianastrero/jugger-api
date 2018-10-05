@@ -10,7 +10,8 @@ namespace JianAstrero\JuggerAPI;
 
 use function app_path;
 use Illuminate\Support\ServiceProvider;
-use JianAstrero\JuggerAPI\Console\Commands\JuggerSeed;
+use JianAstrero\JuggerAPI\Console\Commands\JuggerAdminCommand;
+use JianAstrero\JuggerAPI\Console\Commands\JuggerSeedCommand;
 
 class JuggerAPIServiceProvider extends ServiceProvider
 {
@@ -32,7 +33,8 @@ class JuggerAPIServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                JuggerSeed::class
+                JuggerSeedCommand::class,
+                JuggerAdminCommand::class
             ]);
         }
     }

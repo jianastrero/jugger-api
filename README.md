@@ -29,6 +29,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * CRUD style API creation
 * Handle's operations and errors using HTTP status codes
 * API Versioning
+* Jugger Admin Account for JuggerAPI only
 * Flexible
 
 |              |Default|Override through request|Method|slug|
@@ -47,7 +48,6 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * API Overview
 * Code - Free Mutations Transformation
 * Disable web interface on production
-* Jugger User account not interfering with User accounts
 
 ## Installation
 #### 1. Require the package
@@ -91,7 +91,7 @@ public function boot()
     Passport::routes();
 }
 ```
-#### 10. Set the driver for api to passport on *config/auth.php*
+#### 10. Set the driver for api and add Jugger API admin's guards to passport and add provider for jugger admins on *config/auth.php*
 ```php
 'guards' => [
     'web' => [
@@ -102,6 +102,27 @@ public function boot()
     'api' => [
         'driver' => 'passport',
         'provider' => 'users',
+    ],
+
+    'juggeradmin-api' => [
+        'driver' => 'passport',
+        'provider' => 'juggeradmins',
+    ],
+
+    'juggeradmin' => [
+        'driver' => 'session',
+        'provider' => 'juggeradmins',
+    ],
+    ...
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+        'juggeradmins' => [
+            'driver' => 'eloquent',
+            'model' => JianAstrero\JuggerAPI\Models\JuggerAdmin::class,
+        ]
     ],
 ],
 ```

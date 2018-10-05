@@ -15,13 +15,20 @@ use function substr;
 
 class JuggerController extends Controller
 {
+    private $guard;
+    
+    public function __construct()
+    {
+        $this->guard = Auth::guard('juggeradmin');
+    }
+
     public function index(Request $request) {
         return view('jugger-api::index');
     }
 
     public function login(Request $request) {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
@@ -29,8 +36,8 @@ class JuggerController extends Controller
             return $this->error(422, $validator->errors());
         }
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
+        if ($this->guard->attempt(['username' => $request->username, 'password' => $request->password])) {
+            $user = $this->guard->user();
             $token =  $user->createToken('JuggerAPI');
             return response()->json(['code'=> 200, 'token' => $token->accessToken], 200);
         } else {
@@ -69,7 +76,7 @@ class JuggerController extends Controller
 
     public function logoutApi(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('juggeradmin-api')->user();
 
         $revoked = $user->token()->revoke();
         foreach ($user->tokens() as $token) {

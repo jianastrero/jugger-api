@@ -9,8 +9,8 @@
             <div class="flex-grow-0 col-md-3 col-12 bg-light d-flex flex-column align-content-center justify-content-center">
                 <form v-on:submit.prevent="login" class="flex-grow-0">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input v-model="email" :class="{'is-invalid': errorMessage !== '' || emailErrorMessage !== ''}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input v-model="email" :class="{'is-invalid': errorMessage !== '' || emailErrorMessage !== ''}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
                         <small v-if="emailErrorMessage !== ''" class="form-text text-danger animated fadeInUp">{{ emailErrorMessage }}</small>
                     </div>
                     <div class="form-group">
@@ -65,14 +65,14 @@
                     this.emailErrorMessage = '';
                     this.passwordErrorMessage = '';
                     this.loading = true;
-                    fetch(this.rootUrl + '/api/jugger-api/login', {
+                    fetch(this.rootUrl + '/jugger-api/jugger-api/login', {
                         mode: 'cors',
                         method: 'post',
                         headers: {
                             "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
                             "Accept": "application/json"
                         },
-                        body: 'email='+this.email+'&password='+this.password
+                        body: 'username='+this.email+'&password='+this.password
                     })
                         .then(this.json)
                         .then(this.handleJson)
@@ -90,13 +90,13 @@
             },
             handleError(errors) {
                 if (errors.hasOwnProperty('message')) {
-                    if (errors.message.hasOwnProperty('email')) {
-                        this.emailErrorMessage = errors.message.email[0];
+                    if (errors.message.hasOwnProperty('username')) {
+                        this.emailErrorMessage = errors.message.username[0];
                     }
                     if (errors.message.hasOwnProperty('password')) {
                         this.passwordErrorMessage = errors.message.password[0];
                     }
-                    if (!errors.message.hasOwnProperty('email') && !errors.message.hasOwnProperty('password')) {
+                    if (!errors.message.hasOwnProperty('username') && !errors.message.hasOwnProperty('password')) {
                         this.errorMessage = errors.message;
                     }
                 } else {

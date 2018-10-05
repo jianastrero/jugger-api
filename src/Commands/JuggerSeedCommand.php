@@ -5,7 +5,7 @@ namespace JianAstrero\JuggerAPI\Console\Commands;
 use Illuminate\Console\Command;
 use JianAstrero\JuggerAPI\Models\JuggerRoute;
 
-class JuggerSeed extends Command
+class JuggerSeedCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -61,5 +61,6 @@ class JuggerSeed extends Command
         $juggerRoute->sort = '+model_name';
         $juggerRoute->sort_override = true;
         $juggerRoute->save();
+        $this->info('Successfully seeded jugger routes!');
     }
 }

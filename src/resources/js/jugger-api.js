@@ -49,7 +49,7 @@ Vue.mixin({
         },
         logout() {
             console.log('logging out');
-            fetch(this.rootUrl + '/api/jugger-api/logout', {
+            fetch(this.rootUrl + '/jugger-api/jugger-api/logout', {
                 mode: 'cors',
                 method: 'post',
                 headers: {
