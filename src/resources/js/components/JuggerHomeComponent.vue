@@ -86,9 +86,7 @@
                                     </td>
                                     <td class="p-0" style="width: 15%;">
                                         <div :class="{'bg-success': item.sort_override, 'bg-warning': !item.sort_override}" class="p-2 text-light text-center">CAN{{ item.sort_override ? "" : "\'T" }} OVERRIDE</div>
-                                        <ul class="m-2">
-                                            <li v-for="(sort, index) in item.sort" :key="index" class="text-capitalize">{{ sort.replace(/_/g, ' ') }}</li>
-                                        </ul>
+                                        {{ item.sort }}
                                     </td>
                                     <td style="width: 5%;">
                                         <i :class="{'fa-check-circle text-success': item.list, 'fa-times-circle text-danger': !item.list}" class="fas fa-lg"></i>
