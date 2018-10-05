@@ -19,6 +19,10 @@ class JuggerController extends Controller
     
     public function __construct()
     {
+        if (!config('app.debug')) {
+            $this->notFound()->send();
+            die();
+        }
         $this->guard = Auth::guard('juggeradmin');
     }
 
