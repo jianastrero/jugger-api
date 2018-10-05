@@ -4,11 +4,15 @@ namespace JianAstrero\JuggerAPI\Http\Controllers\API;
 
 use Exception;
 use function explode;
+use function file_put_contents;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use function is_string;
+use JianAstrero\JuggerAPI\Models\JuggerAdmin;
 use JianAstrero\JuggerAPI\Models\JuggerRoute;
 use function json_decode;
+use function json_encode;
 use function response;
 use function str_plural;
 use function str_singular;
@@ -16,6 +20,21 @@ use function substr;
 
 class JuggerAPIController extends Controller
 {
+    public function __construct()
+    {
+        $user = Auth::guard('juggeradmin-api')->user();
+
+        if ($user !== null && $user instanceof JuggerAdmin) {
+            $this->middleware('auth:juggeradmin-api');
+        } else {
+            if (config('app.debug') && ($user == null || $user instanceof JuggerAdmin)) {
+                $this->notFound()->send();
+                die();
+            }
+            $this->middleware('auth:api');
+        }
+    }
+
     public function getList(Request $request, $version, $slug) {
         $juggerRoute = JuggerRoute::where('slug', str_plural($slug))->where('version', preg_replace("/[^0-9,.]/", "", $version))->first();
 

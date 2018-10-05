@@ -5,26 +5,26 @@ Route::group(['namespace' => 'JianAstrero\JuggerAPI\Http\Controllers', 'middlewa
     Route::get('/jugger-api/logout', 'JuggerController@logout');
 });
 
-Route::group(['middleware' => ['api'], 'prefix' => 'api'], function(){
-    Route::post('/jugger-api/login', 'JianAstrero\JuggerAPI\Http\Controllers\JuggerController@login');
+Route::group(['namespace' => 'JianAstrero\JuggerAPI\Http\Controllers', 'middleware' => ['api'], 'prefix' => 'jugger-api'], function(){
+    Route::post('/jugger-api/login', 'JuggerController@login');
 
-    Route::group(['middleware' => 'auth:api'], function(){
-        Route::post('/jugger-api/logout', 'JianAstrero\JuggerAPI\Http\Controllers\JuggerController@logoutApi');
+    Route::group(['middleware' => 'auth:juggeradmin-api'], function(){
+        Route::post('/jugger-api/logout', 'JuggerController@logoutApi');
     });
+});
 
-    Route::group(['namespace' => 'JianAstrero\JuggerAPI\Http\Controllers\API', 'middleware' => 'auth:api'], function(){
-        Route::get('/{version}/{slug}', 'JuggerAPIController@getList');
-        Route::get('/{version}/{slug}/{id}', 'JuggerAPIController@item');
+Route::group(['namespace' => 'JianAstrero\JuggerAPI\Http\Controllers\API', 'middleware' => ['api'], 'prefix' => 'api'], function(){
+    Route::get('/{version}/{slug}', 'JuggerAPIController@getList');
+    Route::get('/{version}/{slug}/{id}', 'JuggerAPIController@item');
 
-        Route::post('/{version}/{slug}', 'JuggerAPIController@create');
-        Route::post('/{version}/{slug}/{id}', 'JuggerAPIController@notAllowed');
+    Route::post('/{version}/{slug}', 'JuggerAPIController@create');
+    Route::post('/{version}/{slug}/{id}', 'JuggerAPIController@notAllowed');
 
-        Route::put('/{version}/{slug}', 'JuggerAPIController@updateMultiple');
-        Route::put('/{version}/{slug}/{id}', 'JuggerAPIController@update');
+    Route::put('/{version}/{slug}', 'JuggerAPIController@updateMultiple');
+    Route::put('/{version}/{slug}/{id}', 'JuggerAPIController@update');
 
-        Route::delete('/{version}/{slug}', 'JuggerAPIController@deleteMultiple');
-        Route::delete('/{version}/{slug}/{id}', 'JuggerAPIController@delete');
+    Route::delete('/{version}/{slug}', 'JuggerAPIController@deleteMultiple');
+    Route::delete('/{version}/{slug}/{id}', 'JuggerAPIController@delete');
 
-        Route::get('{any}', 'JuggerAPIController@notFound')->where('any', '.*');
-    });
+    Route::get('{any}', 'JuggerAPIController@notFound')->where('any', '.*');
 });
