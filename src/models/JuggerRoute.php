@@ -27,7 +27,6 @@ class JuggerRoute extends Model
     ];
 
     protected $casts = [
-        'columns' => 'array',
-        'sort' => 'array',
+        'columns' => 'array'
     ];
 }
