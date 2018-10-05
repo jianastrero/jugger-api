@@ -53,23 +53,21 @@ class JuggerAPIController extends Controller
             }
         }
 
-        $sortColumns = $juggerRoute->sort;
+        $sortColumn = $juggerRoute->sort;
         $sortAscending = 'asc';
         if ($juggerRoute->sort_override && $request->has('sort')) {
-            $sortColumns = $request->sort;
+            $sortColumn = $request->sort;
         }
 
-        if ($sortColumns[0] == '-') {
+        if ($sortColumn[0] == '-') {
             $sortAscending = 'desc';
-            $sortColumns = substr($sortColumns, 1);
-        } else if ($sortColumns[0] == '+') {
+            $sortColumn = substr($sortColumn, 1);
+        } else if ($sortColumn[0] == '+') {
             $sortAscending = 'asc';
-            $sortColumns = substr($sortColumns, 1);
+            $sortColumn = substr($sortColumn, 1);
         }
 
-        for ($i = 0; $i < count($sortColumns); $i++) {
-            $list = $list->orderBy($sortColumns, $sortAscending);
-        }
+        $list = $list->orderBy($sortColumn, $sortAscending);
 
         // override pagination
         $paginateCount = $juggerRoute->paginate_item_count;
