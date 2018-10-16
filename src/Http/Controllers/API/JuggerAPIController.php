@@ -31,7 +31,12 @@ class JuggerAPIController extends Controller
             }
             $this->middleware('auth:juggeradmin-api');
         } else {
-            if (config('app.debug') && ($user == null || $user instanceof JuggerAdmin)) {
+            if (config('app.debug') && $user != null && $user instanceof JuggerAdmin) {
+                $this->notFound()->send();
+                die();
+            }
+            $user = Auth::user();
+            if ($user == null) {
                 $this->notFound()->send();
                 die();
             }

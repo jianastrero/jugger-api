@@ -25,6 +25,4 @@ Route::group(['namespace' => 'JianAstrero\JuggerAPI\Http\Controllers\API', 'midd
 
     Route::delete('/{version}/{slug}', 'JuggerAPIController@deleteMultiple');
     Route::delete('/{version}/{slug}/{id}', 'JuggerAPIController@delete');
-
-    Route::get('{any}', 'JuggerAPIController@notFound')->where('any', '.*');
 });
