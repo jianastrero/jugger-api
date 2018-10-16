@@ -210,7 +210,7 @@
                                 <div class="form-group">
                                     <label for="inputSlug">Sort <i class="fas fa-question-circle"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Default sorting order on <strong>list API</strong>"></i></label>
                                     <div v-for="(column, index) in models[addInput.model]" :key="index" class="form-check ml-4 mr-4">
-                                        <input  v-model="addInput.sort" class="form-check-input" type="radio" :value="column+',asc'" :id="column + 'SortInput'">
+                                        <input  v-model="addInput.sort" class="form-check-input" type="radio" :value="'+'+column" :id="column + 'SortInput'">
                                         <label class="form-check-label" :for="column + 'SortInput'">
                                             {{ column }}
                                         </label>
@@ -369,7 +369,7 @@
                                 <div class="form-group">
                                     <label for="inputSlugEdit">Sort <i class="fas fa-question-circle"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Default sorting order on <strong>list API</strong>"></i></label>
                                     <div v-for="(column, index) in models[editInput.model]" :key="index" class="form-check ml-4 mr-4">
-                                        <input  v-model="editInput.sort" class="form-check-input" type="radio" :value="column+',asc'" :id="column + 'SortInputEdit'">
+                                        <input  v-model="editInput.sort" class="form-check-input" type="radio" :value="'+'+column" :id="column + 'SortInputEdit'">
                                         <label class="form-check-label" :for="column + 'SortInputEdit'">
                                             {{ column }}
                                         </label>
@@ -670,8 +670,9 @@
                 let body = encodeURI(
                     'model_name=App\\' + this.addInput.model + '&' +
                     'slug=' + this.addInput.slug + '&' +
-                    'columns=' + JSON.stringify(this.addInput.columns) + '&' +
-                    'sort=' + JSON.stringify(this.addInput.sort.split(',')) + '&' +
+                    'columns=' + JSON.stringify(this.addInput.columns) + '&') +
+                    'sort=' + encodeURIComponent(this.addInput.sort) + '&' +
+                    encodeURI(
                     'column_override=' + this.addInput.columnOverride + '&' +
                     'sort_override=' + this.addInput.sortOverride + '&' +
                     'create=' + this.addInput.createAllowed + '&' +
@@ -735,7 +736,7 @@
                 this.editInput.model = item.model_name.split('\\')[1];
                 this.editInput.slug = item.slug;
                 this.editInput.columns = item.columns;
-                this.editInput.sort = JSON.stringify(item.sort).split('[')[1].split(']')[0].replace(new RegExp('"', 'g'),'');
+                this.editInput.sort = item.sort;
                 this.editInput.columnOverride = item.column_override;
                 this.editInput.sortOverride = item.sort_override;
                 this.editInput.listAllowed = item.list;
@@ -755,8 +756,9 @@
                 let body = encodeURI(
                     'model_name=App\\' + this.editInput.model + '&' +
                     'slug=' + this.editInput.slug + '&' +
-                    'columns=' + JSON.stringify(this.editInput.columns) + '&' +
-                    'sort=' + JSON.stringify(this.editInput.sort.split(',')) + '&' +
+                    'columns=' + JSON.stringify(this.editInput.columns) + '&') +
+                    'sort=' + encodeURIComponent(this.editInput.sort) + '&' +
+                    encodeURI(
                     'column_override=' + this.editInput.columnOverride + '&' +
                     'sort_override=' + this.editInput.sortOverride + '&' +
                     'create=' + this.editInput.createAllowed + '&' +

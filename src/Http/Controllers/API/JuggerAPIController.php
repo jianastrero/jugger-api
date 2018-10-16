@@ -141,10 +141,8 @@ class JuggerAPIController extends Controller
 
         $modelName = $juggerRoute->model_name;
 
-        $inputs = $request->input();
-
         try {
-            $item = $modelName::createMutated($inputs);
+            $item = $modelName::createMutated($request);
         } catch (Exception $e) {
             return $this->invalidInput();
         }
@@ -188,7 +186,7 @@ class JuggerAPIController extends Controller
                 if ($row == null) {
                     return $this->notFound();
                 }
-                $row->fillMutated((array)$item);
+                $row->fillMutatedMultiple((array)$item);
                 $rows[] = $row;
 
                 $updateCount++;
@@ -219,7 +217,7 @@ class JuggerAPIController extends Controller
         }
 
         try {
-            $item->fillMutated((array)$request->input());
+            $item->fillMutated($request);
             $item->save();
         } catch (Exception $e) {
             return $this->invalidInput();
