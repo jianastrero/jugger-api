@@ -49,7 +49,7 @@ trait CanMutate
         return $this;
     }
 
-    public function fillMutated($array) {
+    public function fillMutatedMultiple($array) {
         foreach (array_keys($array) as $key) {
             $type = Schema::getColumnType($this->getTable(), $key);
             if ($type == 'boolean') {
@@ -62,7 +62,42 @@ trait CanMutate
         return $this->fill($array);
     }
 
-    public static function createMutated($array) {
+    public function fillMutated($request) {
+        $array = $request->input();
+        if (with(new static)->juggerCasts != null) {
+            foreach (array_keys(with(new static)->juggerCasts) as $key) {
+                if (with(new static)->juggerCasts[$key] == 'file') {
+                    if ($request->hasFile($key)) {
+                        $path = $request->{$key}->store('files');
+                        $array[$key] = $path;
+                    }
+                }
+            }
+        }
+        foreach (array_keys($array) as $key) {
+            $type = Schema::getColumnType($this->getTable(), $key);
+            if ($type == 'boolean') {
+                $array[$key] = ("".$array[$key]) == "true" ? 1 : 0;
+            } else if (is_string($array[$key]) && get_called_class()::is_JSON($array[$key])) {
+                $array[$key] = json_decode($array[$key]);
+            }
+        }
+
+        return $this->fill($array);
+    }
+
+    public static function createMutated($request) {
+        $array = $request->input();
+        if (with(new static)->juggerCasts != null) {
+            foreach (array_keys(with(new static)->juggerCasts) as $key) {
+                if (with(new static)->juggerCasts[$key] == 'file') {
+                    if ($request->hasFile($key)) {
+                        $path = $request->{$key}->store('files');
+                        $array[$key] = $path;
+                    }
+                }
+            }
+        }
         foreach (array_keys($array) as $key) {
             $type = Schema::getColumnType(get_called_class()::getTableName(), $key);
             if ($type == 'boolean') {
@@ -71,6 +106,7 @@ trait CanMutate
                 $array[$key] = json_decode($array[$key]);
             }
         }
+        file_put_contents(public_path('array.json'), json_encode($array));
 
         $item = get_called_class()::create($array);
 

@@ -31,6 +31,7 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * API Versioning
 * Jugger Admin Account for JuggerAPI only
 * Auto-disable web interface on production
+* API with file upload
 * Flexible
 
 |              |Default|Override through request|Method|slug|
@@ -162,10 +163,14 @@ protected $fillable = [
 ];
 ```
 
-## For automatic mutation, Jugger API utilizes the casts array of models to transform columns
+## For automatic mutation, Jugger API utilizes the casts array of models to transform arrays. For files, use juggerCasts array. *This will soon be changed on a newer version for automatic mutation.*
 ```php
 protected $casts = [
     'array_column' => 'array'
+];
+
+protected $juggerCasts = [
+    'myfile' => 'file'
 ];
 ```
 
