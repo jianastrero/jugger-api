@@ -20,8 +20,8 @@
 Jugger API makes creating API's the easiest way possible on laravel. It runs together with your app and can be found at http://yourdomain.com/jugger-api. It depends on Passport, dbal and VueJS. Laravel Passport for OAuth on API's, and VueJS for the web to create your API's. dbal is used for transformation / mutation. Jugger API follows [best practices for API development](https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/).
 
 ## Dependencies
-* laravel/passport
-* doctrine/dbal
+* laravel/passport (depends on laravel version, should be required manually)
+* doctrine/dbal (automatically required)
 
 ## Features
 * Admin Panel for API Routes
@@ -51,8 +51,15 @@ Jugger API makes creating API's the easiest way possible on laravel. It runs tog
 * Code - Free Mutations Transformation
 
 ## Installation
-#### 1. Require the package
+#### 1.A Require the package
 `composer require jianastrero/jugger-api`
+#### 1.B Require laravel passport
+##### Laravel 5.6 up
+`composer require laravel/passport`
+##### Laravel 5.5
+`composer require laravel/passport=~4.0`
+##### Laravel 5.4
+`composer require laravel/passport=~2.0`
 #### 2. Depending on your laravel version, you may need to add this to *config/app.php*
 ```php
 'providers' => [
