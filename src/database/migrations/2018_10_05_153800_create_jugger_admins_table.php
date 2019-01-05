@@ -30,6 +30,6 @@ class CreateJuggerAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jugger_routes');
+        Schema::dropIfExists('jugger_admins');
     }
 }
