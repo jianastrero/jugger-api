@@ -290,7 +290,7 @@ class JuggerAPIController extends Controller
     }
 
     public function notAllowed() {
-        return response()->json($this->errorArray(405, 'Method not allowed'), 404);
+        return response()->json($this->errorArray(405, 'Method not allowed'), 405);
     }
 
     public function invalidInput() {
